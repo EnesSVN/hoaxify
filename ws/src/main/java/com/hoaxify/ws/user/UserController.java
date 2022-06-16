@@ -1,19 +1,23 @@
 package com.hoaxify.ws.user;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.hoaxify.ws.shared.GenericResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
 
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    @CrossOrigin
+    @Autowired
+    UserService userService;
     @PostMapping(value ="/api/1.0/users")
-    public void createUser(@RequestBody User user){
-        log.info(user.toString());
+    @ResponseStatus(HttpStatus.OK)
+    //@ResponseStatus(HttpStatus.CREATED)
+    public GenericResponse createUser(@RequestBody User user){
+        userService.save(user);
+        return new GenericResponse("user created");
 
     }
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import UserSignupPage from './UserSignupPage';
+import UserSignupPage from './pages/UserSignupPage';
 import reportWebVitals from './reportWebVitals';
+import "./bootstrap-overide.scss";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserSignupPage />
-  </React.StrictMode>
+  </React.StrictMode> 
 );
 
 // If you want to start measuring performance in your app, pass a function
