@@ -19,6 +19,17 @@ class UserSignupPage extends React.Component {
         const { name, value } = event.target;
         const errors = { ...this.state.errors };
         errors[name] = undefined;
+        if(name == "password" || name == "passwordRepeat"){
+            if(name == "password" && value !== this.state.passwordRepeat){
+                errors.passwordRepeat = "Passwords mismatch";
+
+            }else if(name == "passwordRepeat" && value !== this.state.password){
+                errors.password = "Passwords mismatch";
+            }else{
+                errors.passwordRepeat = undefined;
+                errors.password = undefined;
+            }
+        }
         this.setState({ [name]: value,
         errors
         });
@@ -92,30 +103,22 @@ class UserSignupPage extends React.Component {
 
     render() {
         const { pendingApiCall,errors } = this.state;
-        const {username, displayName} = errors;
+        const {username, displayName,password,passwordRepeat} = errors;
         return (
             <div className="container">
                 <form>
                     <h1 className="text-center">Sign Up</h1>
                     <Input name = "username" label = "Username" error = {username} onChange = {this.onChange} />
                     <Input name = "displayName" label = "Display Name" error = {displayName} onChange = {this.onChange} />
-                    
-                    <div className="form-group mt-3">
-                        <label>Password</label>
-                        <input className="form-control" name="password" onChange={this.onChange} type="password" />
-                    </div>
-                    <div className="form-group mt-3">
-                        <label>Password repeat</label>
-                        <input className="form-control" name="passwordRepeat" onChange={this.onChange} type="password" />
-                    </div>
+                    <Input name = "password" label = "Password" error = {password} onChange = {this.onChange} type="password"/>
+                    <Input name = "passwordRepeat" label = "Password Repeat" error = {passwordRepeat} onChange = {this.onChange} type="password"/>
+
                     <div className="text-center">
 
                         <button className="btn btn-primary  mt-2"
                             onClick={this.onClickSingup}
-                            disabled={pendingApiCall}>
-                            {pendingApiCall && <span className="spinner-border spinner-border-sm" ></span>}
-
-                            Sign Up</button>
+                            disabled={pendingApiCall || passwordRepeat !== undefined || password !== undefined}>
+                            {pendingApiCall && <span className="spinner-border spinner-border-sm" ></span>}Sign Up</button>
                     </div>
                 </form>
             </div>
