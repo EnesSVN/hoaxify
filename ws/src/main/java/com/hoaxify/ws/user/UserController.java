@@ -25,7 +25,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     //@ResponseStatus(HttpStatus.CREATED)
     public GenericResponse createUser(@Valid @RequestBody User user){
-        int max;
+
 
         userService.save(user);
         return new GenericResponse("user created");
