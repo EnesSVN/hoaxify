@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+
 public class WsApplication {
 
 	public static void main(String[] args) {
